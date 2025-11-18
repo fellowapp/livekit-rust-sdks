@@ -36,6 +36,10 @@ struct AudioProcessingConfig {
     webrtc::AudioProcessing::Config config;
     config.echo_canceller.enabled = echo_canceller_enabled;
     config.gain_controller2.enabled = gain_controller_enabled;
+    // todo-zm: upstream the change with proper solution to allow tweaking differernt APM params
+    if (config.gain_controller2.enabled) {
+        config.gain_controller2.adaptive_digital.enabled = true;
+    }
     config.high_pass_filter.enabled = high_pass_filter_enabled;
     config.noise_suppression.enabled = noise_suppression_enabled;
     return config;
